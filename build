@@ -10,6 +10,7 @@ docker run -it \
             -n $(basename $PWD) \
             --version 0.5 \
             --iteration $(git log --all --oneline | wc -l) \
+            --architecture "noarch" \
             --license "Apache License V2.0" \
             --vendor "arne.hilmann@gmail.com" \
             --maintainer "arne.hilmann@gmail.com" \
