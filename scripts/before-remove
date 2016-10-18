@@ -1,0 +1,2 @@
+systemctl stop yumrepos-{admin,web,web-init}
+systemctl disable yumrepos-{web-init,web,admin}

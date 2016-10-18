@@ -1,0 +1,5 @@
+systemctl daemon-reload
+systemctl disable uwsgi nginx
+systemctl enable yumrepos-{web-init,web,admin}
+systemctl restart yumrepos-web
+systemctl restart yumrepos-admin

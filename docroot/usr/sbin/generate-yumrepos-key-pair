@@ -1,0 +1,32 @@
+#!/bin/sh
+set -e -E -o pipefail -u
+
+KEY_FILE=/etc/nginx/credentials/yumrepos.htpasswd
+
+echo
+echo "YumRepos - $(basename $0)"
+echo "creating a new key/secret pair to gain access to the yumrepos admin site"
+echo "(for basic auth: username=key, password=secret)"
+echo
+
+KEY=$(uuidgen)
+echo "key   : $KEY"
+
+SECRET=$(uuidgen)
+echo "secret: $SECRET"
+echo "(NOTE: this is your one and only chance to store your new secret somewhere safe.)"
+echo
+sleep 2
+
+touch "$KEY_FILE"
+htpasswd -b "$KEY_FILE" $KEY $SECRET
+
+echo
+echo "example: check if admin site is operational (service running, credentials valid)"
+echo "curl -kL https://$KEY:$SECRET@localhost/admin/ready"
+echo
+echo "example: revoke a key (because it is compromised/leaked/...)"
+echo "revoke-yumrepos-key $KEY"
+
+echo
+echo "done."

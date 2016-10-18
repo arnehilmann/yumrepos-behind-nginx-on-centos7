@@ -1,0 +1,19 @@
+[Unit]
+Description=Yum Repos
+Requires=yumrepos-web.service
+After=syslog.target yumrepos-web.service
+
+[Service]
+User=nginx
+Group=nginx
+ExecStart=/usr/sbin/uwsgi --plugin python --socket 127.0.0.1:3031 --wsgi-file /etc/yumrepos/yumrepos.wsgi --processes 2 --threads 2 --stats 127.0.0.1:9191
+# Requires systemd version 211 or newer
+RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+StandardError=syslog
+NotifyAccess=all
+
+[Install]
+WantedBy=multi-user.target

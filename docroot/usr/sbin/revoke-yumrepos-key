@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e -E -o pipefail -u
+
+echo
+echo "YumRepos | $(basename $0)"
+echo
+
+KEY=${1:?no KEY given to revoke?!}
+
+htpasswd -D /etc/nginx/credentials/yumrepos.htpasswd $KEY
+
+echo
+echo "key $KEY was revoked and cannot be used any longer."
+echo "done."

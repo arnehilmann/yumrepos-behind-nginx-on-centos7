@@ -1,0 +1,11 @@
+[Unit]
+Description=Setup YumRepos
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/yumrepos-web-init
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target

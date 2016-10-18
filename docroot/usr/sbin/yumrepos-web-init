@@ -1,0 +1,15 @@
+#!/bin/bash
+echo "Setting up nginx ..."
+
+SUBJECT="/CN=yumrepos"
+
+KEY=/etc/nginx/tls/yumrepos.key
+CRT=/etc/nginx/tls/yumrepos.crt
+
+if [[ -e $KEY ]]; then
+    echo "yumrepos key file already present, skipping..."
+    exit 0
+fi
+
+openssl req -new -newkey rsa:2048 -sha256 -days 365 -nodes -x509 -keyout "$KEY" -out "$CRT" -subj "$SUBJECT"
+chmod 600 $KEY

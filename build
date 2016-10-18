@@ -1,0 +1,33 @@
+#!/bin/sh
+
+rm -rf tmp/* && mkdir -p tmp
+docker run -it \
+        -v $PWD/tmp:/target \
+        -v $PWD/docroot:/docroot \
+        -v $PWD/scripts:/scripts \
+        alanfranz/fwd-centos-7 \
+        fpm -s dir -t rpm \
+            -n $(basename $PWD) \
+            --version 0.5 \
+            --iteration $(git log --all --oneline | wc -l) \
+            --license "Apache License V2.0" \
+            --vendor "arne.hilmann@gmail.com" \
+            --maintainer "arne.hilmann@gmail.com" \
+            --description "An highly-opinionated package for installing and running the yumrepos service
+based on centos7, systemd, nginx, and uwsgi" \
+            --url "https://github.com/arnehilmann/yum-repos" \
+            --category "Development/Tools Applications/System" \
+            -p /target \
+            -C /docroot/ \
+            -f \
+            -d nginx \
+            -d uwsgi \
+            -d python \
+            -d uwsgi-plugin-python \
+            -d httpd-tools \
+            -d yum-repos \
+            --directories /usr/share/yumrepos \
+            --after-install /scripts/after-install \
+            --after-upgrade /scripts/after-upgrade \
+            --before-remove /scripts/before-remove \
+            .

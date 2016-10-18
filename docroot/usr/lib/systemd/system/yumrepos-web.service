@@ -1,0 +1,22 @@
+[Unit]
+Description=The YumRepos Web Frontend, based on nginx
+Requires=yumrepos-web-init.service
+After=network.target remote-fs.target nss-lookup.target yumrepos-web-init.service
+
+[Service]
+Type=forking
+PIDFile=/run/nginx.pid
+# Nginx will fail to start if /run/nginx.pid already exists but has the wrong
+# SELinux context. This might happen when running `nginx -t` from the cmdline.
+# https://bugzilla.redhat.com/show_bug.cgi?id=1268621
+ExecStartPre=/usr/bin/rm -f /run/nginx.pid
+ExecStartPre=/usr/sbin/nginx -t -c /etc/nginx/yumrepos-web.conf
+ExecStart=/usr/sbin/nginx -c /etc/nginx/yumrepos-web.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+KillSignal=SIGQUIT
+TimeoutStopSec=5
+KillMode=process
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
