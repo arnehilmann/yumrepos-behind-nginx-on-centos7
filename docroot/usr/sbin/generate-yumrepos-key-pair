@@ -16,10 +16,11 @@ SECRET=$(uuidgen)
 echo "secret: $SECRET"
 echo "(NOTE: this is your one and only chance to store your new secret somewhere safe.)"
 echo
-sleep 2
 
 touch "$KEY_FILE"
 htpasswd -b "$KEY_FILE" $KEY $SECRET
+
+sleep 2
 
 echo
 echo "example: check if admin site is operational (service running, credentials valid)"
