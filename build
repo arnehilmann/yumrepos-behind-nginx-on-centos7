@@ -26,7 +26,7 @@ based on centos7, systemd, nginx, and uwsgi" \
             -d python \
             -d uwsgi-plugin-python \
             -d httpd-tools \
-            -d yum-repos \
+            -d yumrepos \
             --directories /usr/share/yumrepos \
             --after-install /scripts/after-install \
             --after-upgrade /scripts/after-upgrade \
