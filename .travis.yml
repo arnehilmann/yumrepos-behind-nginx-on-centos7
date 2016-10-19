@@ -6,12 +6,13 @@ services:
 - docker
 script:
 - "./build"
+- "ls -al tmp/"
 deploy:
 - provider: releases
   api_key:
     secure: ZHX+cWQX/Ol3m/XKWV+bf51nYWvl0+39F+PGl1KgjszwjIhnVAfsYGFliTjdc4XsRG9Q4Cy0b/l7GtsKZDwN2YWnr51/DcDeL53MiCdOcLLvTJvOVhNMW0gfqxsKBGTLGN1lgjugGMOynwfQqI7y8DyRJSQneIBX8uZnAch7CMNUdY75KobzVhKTQ9m04oEDeV7/hc97sOt7hqgF4mln+4QXLtmuYfy/eRj/kh1YRs8tcUl72pTr8aeMbdKSFIs6efy/IgKl+Vcs2l/nm/P0G5DOiB2I5hcmh7z3MXVzSr6FWcusweSOmrcsNhvLcsdIBvPTdQzUPMFd9/RDlxgm7e0493EOMLje5i87AEHE7E766W9v9t8zuA2kP7NCmf7c8+Ex9c5W1B4nV07rWb7sUn+4qnArJBAdljCCyoKRxA5VuJzVHqbFgYWMsxamOipgD2JmfRFpgE4FIyfea8m1hBEquky0YUhwqasgCDi03PKE5yeGPQproIUoemX2dIcGofY0+wcBPk0rgqE+yfj2eqT13TC21NHhBJVSsvY59Cc1AG01I4hVilcDUjLatUO2H1DKa6dbXyyHBRWre3ue647j1IS3JdQMESK1begDnEPPuNqnJTblfjNEnx102+9ty2Kb2yczoD7qOLdPSez3VQJPAFcP3NLD7AVtm+Nafgs=
   file:
-  - "$(find tmp/*.noarch.rpm)"
+  - "$(ls -1 tmp/*.rpm)"
   skip_cleanup: true
   on:
     tags: true
