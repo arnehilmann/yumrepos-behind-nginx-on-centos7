@@ -1,17 +1,17 @@
 language: python
 sudo: required
 python:
-  - '2.7'
+- '2.7'
 services:
-  - docker
+- docker
 script:
-  - "./build"
+- "./build"
 deploy:
-  - provider: releases
-    api_key:
-      secure: QzO7L/azRkL6AAOhdglX76pHNfOdBw2xZ50hW0SQC3QSwDISTHM2egJ0KlvL4nq/44mlx5Fa7n1U42DQHI1IGeW23eJ45dEoEnx7MUnNPEhGrxS2wA8l/yXJ7fFXfRltGDZpHQ3rDxlf/ybs/1YV0/7fXDPB2LIpE5n6XgDixRUpbgLQ2/kkrnKgJvjm5AQGvznJRRvKPGVjgfPiz+j24UYd0rVPZm8m4gVsEFbOS+TKSdT3uBh30Vr8R/dRu7uW+M8iYvcjy9YKkj8gOR6jHVAKvcLzQF/eySj+qtFVkHKHML+0sdDa5eE6QFrSGYj9ZPIboLfCfAvcU7RDtP6ZhHZYAPj3sDmqlBLkHxo3SEwbILvqyQSeNI/bQqJbjcHkbZ50curUMmZEdyJvr0BEYTMyt7nF3dfxOU64b2cIdDtiShLF4OzUxuCH72o/Nfjv7iJxmIt/lQz80Gh4pVfqbjQQApBw7ih0GJZaKdJQ7qMxXbeWEIr9WI1QKOjffuYlNiLlNeUPAapfNHL8XDL+twQB8iNpxnyjoEic6qLPvxn85+jsUm4vc3433HU3eSaspI4y6NYmrOme6IRieZal26ShHifFPS47Vr2gFU2s+MnM0OXuRaYFzaIyZ1VWUbh2h+Rx91qAHHha9VlRmXruWpj2B55v+tuuF+tbsOoKuO8=
-    file:
-      - "$(find tmp/*.noarch.rpm)"
-    skip_cleanup: true
-    on:
-      tags: true
+- provider: releases
+  api_key:
+    secure: ZHX+cWQX/Ol3m/XKWV+bf51nYWvl0+39F+PGl1KgjszwjIhnVAfsYGFliTjdc4XsRG9Q4Cy0b/l7GtsKZDwN2YWnr51/DcDeL53MiCdOcLLvTJvOVhNMW0gfqxsKBGTLGN1lgjugGMOynwfQqI7y8DyRJSQneIBX8uZnAch7CMNUdY75KobzVhKTQ9m04oEDeV7/hc97sOt7hqgF4mln+4QXLtmuYfy/eRj/kh1YRs8tcUl72pTr8aeMbdKSFIs6efy/IgKl+Vcs2l/nm/P0G5DOiB2I5hcmh7z3MXVzSr6FWcusweSOmrcsNhvLcsdIBvPTdQzUPMFd9/RDlxgm7e0493EOMLje5i87AEHE7E766W9v9t8zuA2kP7NCmf7c8+Ex9c5W1B4nV07rWb7sUn+4qnArJBAdljCCyoKRxA5VuJzVHqbFgYWMsxamOipgD2JmfRFpgE4FIyfea8m1hBEquky0YUhwqasgCDi03PKE5yeGPQproIUoemX2dIcGofY0+wcBPk0rgqE+yfj2eqT13TC21NHhBJVSsvY59Cc1AG01I4hVilcDUjLatUO2H1DKa6dbXyyHBRWre3ue647j1IS3JdQMESK1begDnEPPuNqnJTblfjNEnx102+9ty2Kb2yczoD7qOLdPSez3VQJPAFcP3NLD7AVtm+Nafgs=
+  file:
+  - "$(find tmp/*.noarch.rpm)"
+  skip_cleanup: true
+  on:
+    tags: true
