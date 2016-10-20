@@ -1,3 +1,4 @@
+chown -R nginx:nginx /usr/share/yumrepos
 systemctl daemon-reload
 systemctl disable uwsgi nginx
 systemctl enable yumrepos-{web-init,web,admin}
