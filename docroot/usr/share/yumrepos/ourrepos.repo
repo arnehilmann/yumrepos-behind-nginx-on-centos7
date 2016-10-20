@@ -1,0 +1,9 @@
+[main]
+plugins=1
+
+[ourrepos]
+name=the home of our repos
+baseurl=https://<ENTER_YUMREPOS_SERVER_HERE>/repos
+gpgcheck=0
+sslverify=0
+enabled=1
