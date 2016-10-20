@@ -23,11 +23,16 @@ htpasswd -b "$KEY_FILE" $KEY $SECRET
 sleep 2
 
 echo
-echo "example: check if admin site is operational (service running, credentials valid)"
-echo "curl -kL https://$KEY:$SECRET@localhost/admin/ready"
+echo "some examples:"
+echo "check if admin site is operational (service running, credentials valid)"
+echo ".   curl -kL https://$KEY:$SECRET@localhost/admin/v1/ready"
 echo
-echo "example: revoke a key (because it is compromised/leaked/...)"
-echo "revoke-yumrepos-key $KEY"
+echo "store key/secret in separate file, to avoid exposing secret on command line"
+echo ".   echo 'user=$KEY:$SECRET' > yumrepos.credentials"
+echo ".   curl -k -K yumrepos.credentials https://localhost/admin/v1/ready"
+echo
+echo "revoke a key (because it is compromised/leaked/...)"
+echo ".   revoke-yumrepos-key $KEY"
 
 echo
 echo "done."
