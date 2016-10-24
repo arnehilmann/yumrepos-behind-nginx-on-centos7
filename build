@@ -16,7 +16,7 @@ docker run -it \
             --maintainer "arne.hilmann@gmail.com" \
             --description "An highly-opinionated package for installing and running the yumrepos service
 based on centos7, systemd, nginx, and uwsgi" \
-            --url "https://github.com/arnehilmann/yum-repos" \
+            --url "https://github.com/arnehilmann/yumrepos-behind-nginx-on-centos7" \
             --category "Development/Tools Applications/System" \
             -p /target \
             -C /docroot/ \
