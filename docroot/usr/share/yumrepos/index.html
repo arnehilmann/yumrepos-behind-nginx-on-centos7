@@ -2,60 +2,73 @@
 <html lang="en">
 <head>
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>YumRepos</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 <body>
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="column" style="margin-top: 15%">
+      <div class="column" style="margin-top: 10%; margin-bottom: 20%;">
         <h2>YumRepos</h2>
 
-        <h4>Looking for some RPMs?</h4>
+        <h4>Looking for RPMs?</h4>
         <p>
         Here are the <a href="/repos/">repos</a>...
         </p>
 
-        <h4>Want to use these repos?</h4>
+        <h4>First Usage</h4>
+        <h5>on yumrepos server, as root</h5>
         <p>
-        Add something like <a href="ourrepos.repo">this repo definition</a>
-        to your <code>/etc/yum.repos.d/</code> dir;<br/>
-        replace placeholder in <code>baseurl</code> parameter with this hostname.
+        generate a key/secret pair with
+            <code>generate-yumrepos-key-pair</code>, follow instructions to store these credentials
         </p>
 
-        <h4>Want to upload/change/admin these repos?</h4>
+        <h5>on some client trying to use the new yumrepos server, as any user with credentials</h5>
         <p>
-        Have a look at the <a href="https://github.com/arnehilmann/yumrepos#rest-api">API</a>.
+        <ol>
+            <li>create toplevel <code>foo</code> repository:
+                <code>curl -k -K yumrepos.credentials https://[YUMREPOS_SERVER]/admin/v1/repos/foo -X PUT</code></li>
+            <li>upload first rpm:
+                <code>curl -k -K yumrepos.credentials https://[YUMREPOS_SERVER]/admin/v1/repos/foo -F rpm=@[YOUR_RPM_FILE]</code></li>
+            <li>check repo via <a href="/repos/foo">web browser</a></li>
+            <li>update repo metadata:<br/>
+                <code>curl -k -K yumrepos.credentials https://[YUMREPOS_SERVER]/admin/v1/update</code></li>
+            <li>check repo via <code>yum</code> (finally):
+                <ul>
+                    <li>save the following config as <code>foo.repo</code>:
+                        <pre><code>[foo]
+name=the foo repo
+baseurl=https://[YUMREPOS_SERVER]/repos/foo
+gpgcheck=0
+enabled=1
+sslverify=0</code></pre>
+                    </li>
+                    <li>
+                        <code>yum -c foo.repo search [YOUR_RPM_FILE]</code>
+                    </li>
+                </ul>
+            </li>
+            <li><b>Tadahh!</b>
+        </ol>
         </p>
 
-        <h4>Questions/Comments?</h4>
+        <h4>Further Questions/Comments?</h4>
         <p>
-        See the <a href="https://github.com/arnehilmann/yumrepos">admin part</a>
+        Have a look at the <a href="https://github.com/arnehilmann/yumrepos#rest-api">API</a>.<br/>
+        And See the <a href="https://github.com/arnehilmann/yumrepos">admin part</a>
         or the <a href="https://github.com/arnehilmann/yumrepos-behind-nginx-on-centos7">centos7-specific configuration</a>
         of this installation.
         </p>
@@ -64,7 +77,5 @@
     </div>
   </div>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
